@@ -14,6 +14,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("LotteryProject.Server")));
 
 builder.Services.AddScoped<IGuestService, GuestService>();
+builder.Services.AddScoped<IPresentService, PresentService>();
 var app = builder.Build();
 
 
