@@ -47,7 +47,7 @@ namespace LotteryProject.Server.Controllers
             return Ok(guestToUpdate);
         }
         [HttpDelete]
-        [Route("DeleteTodoItem/{guestID:guid}")]
+        [Route("DeleteGuest/{guestID:guid}")]
         public async Task<IActionResult> DeleteById(Guid guestID, CancellationToken cancellationToken = default)
         {
             await _guestService.DeleteGuestById(guestID, cancellationToken);
