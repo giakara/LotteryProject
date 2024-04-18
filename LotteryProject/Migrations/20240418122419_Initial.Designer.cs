@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LotteryProject.Server.Migrations
 {
     [DbContext(typeof(EntityDbContext.DataContext))]
-    [Migration("20240418115950_Initial")]
+    [Migration("20240418122419_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -28,6 +28,7 @@ namespace LotteryProject.Server.Migrations
             modelBuilder.Entity("LotteryProject.Models.Entities.Guest", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("GuestName")
@@ -62,12 +63,17 @@ namespace LotteryProject.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GuestID");
+
+                    b.HasIndex("PresentID");
+
                     b.ToTable("Lotteries", (string)null);
                 });
 
             modelBuilder.Entity("LotteryProject.Models.Entities.Present", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Category")
@@ -83,30 +89,20 @@ namespace LotteryProject.Server.Migrations
                     b.ToTable("Presents", (string)null);
                 });
 
-            modelBuilder.Entity("LotteryProject.Models.Entities.Guest", b =>
-                {
-                    b.HasOne("LotteryProject.Models.Entities.Lottery", "Lottery")
-                        .WithOne("Guest")
-                        .HasForeignKey("LotteryProject.Models.Entities.Guest", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lottery");
-                });
-
-            modelBuilder.Entity("LotteryProject.Models.Entities.Present", b =>
-                {
-                    b.HasOne("LotteryProject.Models.Entities.Lottery", "Lottery")
-                        .WithOne("Present")
-                        .HasForeignKey("LotteryProject.Models.Entities.Present", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lottery");
-                });
-
             modelBuilder.Entity("LotteryProject.Models.Entities.Lottery", b =>
                 {
+                    b.HasOne("LotteryProject.Models.Entities.Guest", "Guest")
+                        .WithMany()
+                        .HasForeignKey("GuestID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LotteryProject.Models.Entities.Present", "Present")
+                        .WithMany()
+                        .HasForeignKey("PresentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Guest");
 
                     b.Navigation("Present");

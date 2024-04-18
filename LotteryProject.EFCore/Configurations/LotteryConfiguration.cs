@@ -12,19 +12,6 @@ namespace LotteryProject.EFCore.Configurations
             builder.ToTable("Lotteries");
             builder.HasKey(b => b.Id);
 
-            builder.HasOne(b => b.Guest)
-            .WithOne(b => b.Lottery)
-            .HasForeignKey<Guest>(b => b.Id)
-            .OnDelete(DeleteBehavior.Cascade)// Cascade delete if a TodoItem is deleted
-            .IsRequired();
-
-            builder.HasOne(b => b.Present)
-            .WithOne(b => b.Lottery)
-            .HasForeignKey<Present>(b => b.Id)
-            .OnDelete(DeleteBehavior.Cascade)// Cascade delete if a TodoItem is deleted
-            .IsRequired();
-
-
 
         }
     }

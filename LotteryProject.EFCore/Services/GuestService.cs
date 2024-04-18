@@ -39,7 +39,7 @@ namespace LotteryProject.EFCore.Services
             var guestToAdd = new Guest
             {
                 GuestName = guest.GuestName,
-                GuestSurname = guest.GuestSurname
+                GuestSurname = guest.GuestSurname,
             };
             if (guestToAdd == null)
             {

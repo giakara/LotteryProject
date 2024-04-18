@@ -8,7 +8,6 @@ namespace LotteryProject.Models.Entities
     {
         public string? GuestName { get; set; }
         public string? GuestSurname { get; set; }
-        public virtual Lottery? Lottery { get; set; } = null;
     }
 
 }
