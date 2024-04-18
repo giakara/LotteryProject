@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LotteryProject.Server.Migrations
 {
     [DbContext(typeof(EntityDbContext.DataContext))]
-    [Migration("20240418090312_Initial")]
+    [Migration("20240418105316_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -48,20 +48,20 @@ namespace LotteryProject.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GuestId")
+                    b.Property<Guid>("GuestID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("LotteryDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("PresentId")
+                    b.Property<Guid>("PresentID")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GuestId");
+                    b.HasIndex("GuestID");
 
-                    b.HasIndex("PresentId");
+                    b.HasIndex("PresentID");
 
                     b.ToTable("Lotteries");
                 });
@@ -87,11 +87,15 @@ namespace LotteryProject.Server.Migrations
                 {
                     b.HasOne("LotteryProject.Models.Entities.Guest", "Guest")
                         .WithMany()
-                        .HasForeignKey("GuestId");
+                        .HasForeignKey("GuestID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("LotteryProject.Models.Entities.Present", "Present")
                         .WithMany()
-                        .HasForeignKey("PresentId");
+                        .HasForeignKey("PresentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Guest");
 

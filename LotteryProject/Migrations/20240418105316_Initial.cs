@@ -42,34 +42,36 @@ namespace LotteryProject.Server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GuestId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    PresentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    GuestID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PresentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LotteryDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lotteries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Lotteries_Guests_GuestId",
-                        column: x => x.GuestId,
+                        name: "FK_Lotteries_Guests_GuestID",
+                        column: x => x.GuestID,
                         principalTable: "Guests",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Lotteries_Presents_PresentId",
-                        column: x => x.PresentId,
+                        name: "FK_Lotteries_Presents_PresentID",
+                        column: x => x.PresentID,
                         principalTable: "Presents",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lotteries_GuestId",
+                name: "IX_Lotteries_GuestID",
                 table: "Lotteries",
-                column: "GuestId");
+                column: "GuestID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lotteries_PresentId",
+                name: "IX_Lotteries_PresentID",
                 table: "Lotteries",
-                column: "PresentId");
+                column: "PresentID");
         }
 
         /// <inheritdoc />
