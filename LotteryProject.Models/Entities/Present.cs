@@ -13,5 +13,6 @@ namespace LotteryProject.Models.Entities
 
         public string? Description { get; set; }
         public string? Category { get; set; }
+        public virtual Lottery? Lottery { get; set; } = null;
     }
 }

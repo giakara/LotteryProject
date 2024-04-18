@@ -1,8 +1,6 @@
 using LotteryProject.EFCore.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using static LotteryProject.EFCore.EntityDbContext;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
