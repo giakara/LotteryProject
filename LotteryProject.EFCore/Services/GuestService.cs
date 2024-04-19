@@ -36,11 +36,8 @@ namespace LotteryProject.EFCore.Services
         }
         public async Task<Guest> AddGuest(AddGuestDTO guest, CancellationToken cancellationToken = default)
         {
-            var guestToAdd = new Guest
-            {
-                GuestName = guest.GuestName,
-                GuestSurname = guest.GuestSurname,
-            };
+            var guestToAdd = new Guest(guest.GuestName, guest.GuestSurname);
+
             if (guestToAdd == null)
             {
                 throw new GuestNotFoundException("Guest not found");

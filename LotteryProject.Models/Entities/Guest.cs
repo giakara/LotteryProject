@@ -4,10 +4,10 @@ using System.Runtime.Serialization;
 
 namespace LotteryProject.Models.Entities
 {
-    public class Guest : BaseEntity
+    public class Guest(string guestName, string guestSurname) : BaseEntity
     {
-        public string? GuestName { get; set; }
-        public string? GuestSurname { get; set; }
+        public string GuestName { get; set; } = guestName;
+        public string GuestSurname { get; set; } = guestSurname;
     }
 
 }

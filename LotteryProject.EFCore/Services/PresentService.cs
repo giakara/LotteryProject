@@ -36,9 +36,8 @@ namespace LotteryProject.EFCore.Services
         }
         public async Task<Present> AddPresent(AddPresentDTO present, CancellationToken cancellationToken = default)
         {
-            var presentToAdd = new Present
+            var presentToAdd = new Present(present.Description)
             {
-                Description = present.Description,
                 Category = present.Category,
             };
             if (presentToAdd == null)

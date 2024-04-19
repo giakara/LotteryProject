@@ -1,9 +1,9 @@
 ﻿
 namespace LotteryProject.Models.DTOs
 {
-    public class AddPresentDTO
+    public class AddPresentDTO(string description)
     {
-        public string? Description { get; set; }
+        public string Description { get; set; } = description;
         public string? Category { get; set; }
     }
 }
