@@ -15,6 +15,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<IGuestService, GuestService>();
 builder.Services.AddScoped<IPresentService, PresentService>();
+builder.Services.AddScoped<ILotteryService, LotteryService>();
 var app = builder.Build();
 
 

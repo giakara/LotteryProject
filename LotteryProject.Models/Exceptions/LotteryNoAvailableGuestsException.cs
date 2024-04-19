@@ -1,25 +1,24 @@
 ﻿
-
 namespace LotteryProject.Models.Exceptions
 {
 
-    public class PresentNotFoundException : BaseException
+    public class LotteryNoAvailableGuestsException : BaseException
     {
-        private const string RESOURCE_CODE = "PRNF";
+        private const string RESOURCE_CODE = "LNAGNF";
 
-        public PresentNotFoundException()
+        public LotteryNoAvailableGuestsException()
         {
             Code = RESOURCE_CODE;
             StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
         }
 
-        public PresentNotFoundException(string message) : base(message)
+        public LotteryNoAvailableGuestsException(string message) : base(message)
         {
             Code = RESOURCE_CODE;
             StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
         }
 
-        public PresentNotFoundException(string? message, Exception? innerException) : base(message, innerException)
+        public LotteryNoAvailableGuestsException(string? message, Exception? innerException) : base(message, innerException)
         {
             Code = RESOURCE_CODE;
             StatusCode = (int)System.Net.HttpStatusCode.BadRequest;

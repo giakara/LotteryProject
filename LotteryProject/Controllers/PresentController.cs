@@ -1,7 +1,6 @@
 ﻿using LotteryProject.EFCore.Services;
 using LotteryProject.Models.DTOs;
 using LotteryProject.Models.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LotteryProject.Server.Controllers
