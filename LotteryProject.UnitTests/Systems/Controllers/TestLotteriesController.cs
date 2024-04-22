@@ -57,7 +57,7 @@ namespace LotteryProject.UnitTests.Systems.Controllers
 
         }
         [Fact]
-        public async void Test_CreateLottery_Failed_ThrowLotteryNoAvailableGuestsException()
+        public async Task Test_CreateLottery_Failed_ThrowLotteryNoAvailableGuestsException()
         {
             using var context = _fixture.CreateContext();
             var guid = new Guid("fba7c0dc-4aba-45dd-aab2-dec90db19be8");
@@ -72,25 +72,39 @@ namespace LotteryProject.UnitTests.Systems.Controllers
 
         }
         [Fact]
-        public void Test_CreateLottery_Success()
+        public async Task Test_CreateLottery_Success()
         {
+            var cancellationToken = new CancellationToken();
             using var context = _fixture.CreateContext();
             var guestGuid = new Guid("c1ec69af-1e22-4a3f-a959-5772a8a1dc2e");
-            context.AddRange(new Guest("test3", "test3")
+            var newGuest = new Guest("test3", "test3")
             {
                 Id = guestGuid,
-            });
-            context.SaveChanges();
-            var guid = new Guid("fba7c0dc-4aba-45dd-aab2-dec90db19be8");
-            var cancellationToken = new CancellationToken();
-            var lotterytoAdd = new AddEditLotteryDTO
-            {
-                PresentID = guid,
             };
+            try
+            {
+                await context.AddRangeAsync(newGuest);
+                await context.SaveChangesAsync();
 
-            var lotteryService = new LotteryService(context);
-            var successReturn = lotteryService.CreateLottery(lotterytoAdd, cancellationToken)?.Result;
-            Assert.Equal(successReturn?.PresentID, lotterytoAdd.PresentID);
+                var guid = new Guid("fba7c0dc-4aba-45dd-aab2-dec90db19be8");
+                var lotterytoAdd = new AddEditLotteryDTO
+                {
+                    PresentID = guid,
+                };
+
+                var lotteryService = new LotteryService(context);
+                var successReturn = lotteryService.CreateLottery(lotterytoAdd, cancellationToken)?.Result;
+                successReturn!.PresentID.Should().Be(guid);
+            }
+            finally
+            {
+                context.Set<Guest>().Remove(newGuest);
+                await context.SaveChangesAsync();
+
+            }
+
+
+
 
         }
     }
