@@ -72,7 +72,7 @@ namespace LotteryProject.UnitTests.Systems.Controllers
 
         }
         [Fact]
-        public async void Test_CreateLottery_Success()
+        public void Test_CreateLottery_Success()
         {
             using var context = _fixture.CreateContext();
             var guestGuid = new Guid("c1ec69af-1e22-4a3f-a959-5772a8a1dc2e");
@@ -89,8 +89,8 @@ namespace LotteryProject.UnitTests.Systems.Controllers
             };
 
             var lotteryService = new LotteryService(context);
-            var successReturn = lotteryService.CreateLottery(lotterytoAdd, cancellationToken);
-            Assert.Equal(successReturn.Result.PresentID, lotterytoAdd.PresentID);
+            var successReturn = lotteryService.CreateLottery(lotterytoAdd, cancellationToken)?.Result;
+            Assert.Equal(successReturn?.PresentID, lotterytoAdd.PresentID);
 
         }
     }
