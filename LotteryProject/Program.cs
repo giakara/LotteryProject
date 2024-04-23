@@ -11,19 +11,29 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("LotteryProject.Server")));
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("LotteryProject.Server")));
 
 builder.Services.AddScoped<IGuestService, GuestService>();
 builder.Services.AddScoped<IPresentService, PresentService>();
 builder.Services.AddScoped<ILotteryService, LotteryService>();
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy(name: "BlazorApp",
+					  policy =>
+					  {
+						  policy.WithOrigins("https://localhost:7169")
+						  .AllowAnyHeader()
+						  .AllowAnyMethod();
+					  });
+});
 var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
@@ -31,5 +41,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors("BlazorApp");
 
 app.Run();

@@ -30,8 +30,7 @@ namespace LotteryProject.EFCore.Services
         }
         public async Task<Lottery> CreateLottery(AddEditLotteryDTO lottery, CancellationToken cancellationToken = default)
         {
-            if (lottery == null)
-                throw new LotteryNotFoundException("Lottery not found");
+
             if (lottery.PresentID == Guid.Empty)
                 throw new LotteryPresentIsRequiredException("Present is required for the Lottery");
             if (_dbContext.Lotteries.Any(l => l.PresentID == lottery.PresentID))
@@ -50,10 +49,9 @@ namespace LotteryProject.EFCore.Services
             {
                 throw new LotteryNoAvailableGuestsException("No available guests for the lottery today");
             }
-            var lotteryToCreate = new Lottery
+            var lotteryToCreate = new Lottery(lottery.PresentID)
             {
                 GuestID = availableGuestIds[new Random().Next(0, availableGuestIds.Count)],
-                PresentID = lottery.PresentID,
                 LotteryDate = DateTime.Now,
             };
             _dbContext.Lotteries.Add(lotteryToCreate);

@@ -6,12 +6,16 @@ using LotteryProject.Models.Exceptions;
 using LotteryProject.Server.Controllers;
 using LotteryProject.UnitTests.Fixtures;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Moq;
+using Moq.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using static LotteryProject.EFCore.EntityDbContext;
 using static System.Collections.Specialized.BitVector32;
 
 namespace LotteryProject.UnitTests.Systems.Controllers
@@ -102,6 +106,27 @@ namespace LotteryProject.UnitTests.Systems.Controllers
                 await context.SaveChangesAsync();
 
             }
+            //var posts = new List<Guest>();
+            //var contextMock = new Mock<DataContext>();
+            //var guestGuid = new Guid("c1ec69af-1e22-4a3f-a959-5772a8a1dc2e");
+            //var newGuest = new Guest("test3", "test3")
+            //{
+            //    Id = guestGuid,
+            //};
+            //var guid = new Guid("fba7c0dc-4aba-45dd-aab2-dec90db19be8");
+            //var lotterytoAdd = new AddEditLotteryDTO
+            //{
+            //    PresentID = guid,
+            //};
+            //var present = new Present("tessss") { Id = guid };
+
+            //posts.Add(newGuest);
+            //contextMock.Setup(p => p.Guests).ReturnsDbSet(posts);
+            //contextMock.Setup(p => p.Lotteries).ReturnsDbSet(new List<Lottery>());
+            //contextMock.Setup(p => p.Presents).ReturnsDbSet(new List<Present>() { present });
+            //var lotteryService = new LotteryService(contextMock.Object);
+            //var successReturn = lotteryService.CreateLottery(lotterytoAdd, cancellationToken)?.Result;
+            //successReturn!.PresentID.Should().Be(guid);
 
 
 

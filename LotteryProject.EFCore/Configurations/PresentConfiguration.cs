@@ -16,7 +16,8 @@ namespace LotteryProject.EFCore.Configurations
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(b => b.Category);
+            builder.Property(b => b.Category)
+                .HasMaxLength(100);
 
 
         }

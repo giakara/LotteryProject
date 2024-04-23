@@ -39,9 +39,10 @@ namespace LotteryProject.EFCore.Services
             var guestToAdd = new Guest(guest.GuestName, guest.GuestSurname);
 
             if (guestToAdd == null)
-            {
                 throw new GuestNotFoundException("Guest not found");
-            }
+
+            if (_dbContext.Guests.Any(g => g.GuestName == guestToAdd.GuestName && g.GuestSurname == guestToAdd.GuestSurname))
+                throw new GuestDuplicateException("Guest is already Exists");
             _dbContext.Guests.Add(guestToAdd);
             await _dbContext.SaveChangesAsync();
             return guestToAdd;
