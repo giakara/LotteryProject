@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/app.css",
+    "inputFile": "wwwroot/css/app.scss"
+  },
+  {
+    "outputFile": "Layout/NavMenu.razor.css",
+    "inputFile": "Layout/NavMenu.razor.scss"
+  },
+  {
+    "outputFile": "Layout/MainLayout.razor.css",
+    "inputFile": "Layout/MainLayout.razor.scss"
+  }
+]

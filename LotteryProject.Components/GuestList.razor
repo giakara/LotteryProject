@@ -1,0 +1,33 @@
+﻿<PageTitle>Guests</PageTitle>
+<h1>Guests</h1>
+
+@if (guests is null)
+{
+	<h3>Loading...</h3>
+}
+else
+{
+	<a href="AddGuest" class="btn-green" style="width:fit-content;margin-top:50px; margin-bottom: 10px; background-color:#7E57C2;">
+		<i class="fa fa-plus-square"></i>
+	</a>
+	<table class="test">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Surname</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var guest in guests)
+			{
+				<GuestListItem GuestItem="@guest" OnGuestDeleted="@HandleGuestDeleted" />
+			}
+		</tbody>
+	</table>
+
+	<div class="pager">
+		<Pager PagingParameters="@_pagingParameters" SelectedPage="@SelectedPage"></Pager>
+	</div>
+
+
+}

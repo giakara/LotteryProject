@@ -1,6 +1,7 @@
 ﻿using LotteryProject.Client.Shared.Services.Interfaces;
 using LotteryProject.Models.DTOs;
 using LotteryProject.Models.Entities;
+using LotteryProject.Models.Paging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace LotteryProject.Client.Shared.Services
 	public class GuestService : IGuestService
 	{
 		private readonly HttpClient _httpClient;
-		private const string GuestControllerName = "api/Guest";
+		private const string GuestControllerName = "https://localhost:7292/api/Guest";
 		private readonly JsonSerializerOptions _jsonSerializerOptions;
 		public GuestService(HttpClient httpClient)
 		{
@@ -127,6 +128,25 @@ namespace LotteryProject.Client.Shared.Services
 			{
 				throw new NotImplementedException();
 			}
+		}
+		public async Task<PagedList<Guest>> GetPaged(PagingParameters pagingParameters, CancellationToken cancellationToken = default)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+
+			var httpResponse = await _httpClient.GetAsync($"{GuestControllerName}/GetAllGuestsPaged?pageNumber={pagingParameters.PageNumber}&pageSize={pagingParameters.PageSize}", cancellationToken);
+
+			httpResponse.EnsureSuccessStatusCode();
+
+			if (httpResponse.IsSuccessStatusCode)
+			{
+
+				var result = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
+				var result2 = await httpResponse.Content.ReadFromJsonAsync<PagedList<Guest>>(cancellationToken);
+
+				return result2 ?? throw new NotImplementedException();
+			}
+
+			throw new HttpRequestException($"The HTTP request failed with status code: {httpResponse.StatusCode}");
 		}
 	}
 }

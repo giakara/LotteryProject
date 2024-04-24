@@ -1,0 +1,34 @@
+﻿@using LotteryProject.Components
+
+<div class="guest-item">
+
+	<div class="item-main-section-base-labels">
+		<div class="label-item">
+			@GuestItem.GuestSurname
+		</div>
+		<div class="label-item">
+			@GuestItem.GuestName
+		</div>
+	</div>
+	@* <div class="todo-item-main-section-base-buttons">
+	@if (CommentSectionIsVisible())
+	{
+	<button class="btn btn-outline-light" title="Comments Section" @onclick="@(() => ToggleCommentsSection(TodoItem.Id))">
+	<i class="fa fa-sort-up"></i>
+	</button>
+	}
+	else
+	{
+	<button class="btn btn-outline-light" title="Comments Section" @onclick="@(() => ToggleCommentsSection(TodoItem.Id))">
+	<i class="fa fa-sort-down"></i>
+	</button>
+	}
+
+	<button class="btn btn-outline-light" title="Edit Task" @onclick="@(() => NavigateToEdit(TodoItem.Id))" style="margin-left:10px;background-color: #7E57C2;">
+	<i class="fa fa-pencil"></i>
+	</button>
+	<button class="btn btn-outline-light" title="Delete Task" @onclick="@(() => DeleteRowItemFromList(TodoItem.Id))" style="margin-left:10px;background-color: #7E57C2; margin-right:10px;">
+	<i class="fa fa-trash"></i>
+	</button>
+	</div> *@
+</div>

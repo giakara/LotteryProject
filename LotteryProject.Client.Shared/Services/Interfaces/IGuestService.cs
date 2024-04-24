@@ -1,6 +1,7 @@
 ﻿
 using LotteryProject.Models.DTOs;
 using LotteryProject.Models.Entities;
+using LotteryProject.Models.Paging;
 using System.Threading.Tasks;
 
 namespace LotteryProject.Client.Shared.Services.Interfaces
@@ -12,5 +13,6 @@ namespace LotteryProject.Client.Shared.Services.Interfaces
 		Task<IEnumerable<Guest>> GetAllGuests(CancellationToken cancellationToken = default);
 		Task<Guest> GetGuest(Guid guestId, CancellationToken cancellationToken = default);
 		Task<Guest> UpdateGuest(Guest guest, CancellationToken cancellationToken = default);
+		Task<PagedList<Guest>> GetPaged(PagingParameters pagingParameters, CancellationToken cancellationToken = default);
 	}
 }

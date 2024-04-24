@@ -11,11 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryProject.EFCore", "Lo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryProject.UnitTests", "LotteryProject.UnitTests\LotteryProject.UnitTests.csproj", "{B5DE9CDA-5157-4F18-AD8A-1505E589B2D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotteryProject.Client", "LotteryProject.Client\LotteryProject.Client.csproj", "{7EFCFADB-DD41-4F6A-B155-2CC79AAF4E67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryProject.Client", "LotteryProject.Client\LotteryProject.Client.csproj", "{7EFCFADB-DD41-4F6A-B155-2CC79AAF4E67}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{27F8857F-0CAB-45FD-868F-F638E019292C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotteryProject.Client.Shared", "LotteryProject.Client.Shared\LotteryProject.Client.Shared.csproj", "{B8CC80D0-1970-4696-B9FD-AE760A5F8B83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryProject.Client.Shared", "LotteryProject.Client.Shared\LotteryProject.Client.Shared.csproj", "{B8CC80D0-1970-4696-B9FD-AE760A5F8B83}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LotteryProject.Components", "LotteryProject.Components\LotteryProject.Components.csproj", "{9F050DF7-BF85-4DE9-90F1-C8DF02B5D0B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,12 +49,17 @@ Global
 		{B8CC80D0-1970-4696-B9FD-AE760A5F8B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8CC80D0-1970-4696-B9FD-AE760A5F8B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8CC80D0-1970-4696-B9FD-AE760A5F8B83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F050DF7-BF85-4DE9-90F1-C8DF02B5D0B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F050DF7-BF85-4DE9-90F1-C8DF02B5D0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F050DF7-BF85-4DE9-90F1-C8DF02B5D0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F050DF7-BF85-4DE9-90F1-C8DF02B5D0B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B8CC80D0-1970-4696-B9FD-AE760A5F8B83} = {27F8857F-0CAB-45FD-868F-F638E019292C}
+		{9F050DF7-BF85-4DE9-90F1-C8DF02B5D0B3} = {27F8857F-0CAB-45FD-868F-F638E019292C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B878A23-BB91-4FD4-B289-103DAA2E622F}
