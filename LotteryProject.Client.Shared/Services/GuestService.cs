@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace LotteryProject.Client.Shared.Services
 {
@@ -147,6 +148,25 @@ namespace LotteryProject.Client.Shared.Services
 			}
 
 			throw new HttpRequestException($"The HTTP request failed with status code: {httpResponse.StatusCode}");
+		}
+		public async Task<PagedList<Guest>> SearchGuests(string searchText, PagingParameters pagingParameters, CancellationToken cancellationToken = default)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+
+			var httpResponse = await _httpClient.GetAsync($"{GuestControllerName}/SearchGuest/{searchText}/?pageNumber={pagingParameters.PageNumber}&pageSize={pagingParameters.PageSize}", cancellationToken);
+
+			httpResponse.EnsureSuccessStatusCode();
+
+			if (httpResponse.IsSuccessStatusCode)
+			{
+
+				var result = await httpResponse.Content.ReadAsStringAsync(cancellationToken);
+				var result2 = await httpResponse.Content.ReadFromJsonAsync<PagedList<Guest>>(cancellationToken);
+
+				return result2 ?? throw new NotImplementedException();
+			}
+			throw new HttpRequestException($"The HTTP request failed with status code: {httpResponse.StatusCode}");
+
 		}
 	}
 }

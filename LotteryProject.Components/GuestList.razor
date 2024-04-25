@@ -1,4 +1,6 @@
-﻿<PageTitle>Guests</PageTitle>
+﻿@using LotteryProject.Client.Shared.Services.Interfaces
+
+<PageTitle>Guests</PageTitle>
 <h1>Guests</h1>
 
 @if (guests is null)
@@ -8,6 +10,8 @@
 else
 {
 
+	<input class="input-search" type="text" placeholder="Search.." @bind-value="filteredText" name="search">
+	<button class="btn-search" @onclick="@(() => SearchGuest(filteredText))" type="button"><i class="fa fa-search"></i></button>
 	<ul class="guest-list">
 		@for (var index = 1; index < guests.ToList().Count() + 1; index++)
 		{
@@ -17,13 +21,13 @@ else
 				<GuestListItem Index="@indexOfGuest" GuestItem="@guest" OnGuestDeleted="@HandleGuestDeleted" />
 			</li>
 		}
-		<button class="add-btn" type="button" onclick="addGuest()">Add Guest</button>
+		<button class="add-btn" type="button" @onclick="@(() => AddGuest())">Add Guest</button>
 	</ul>
-
 
 	<div class="pager">
 		<Pager PagingParameters="@_pagingParameters" SelectedPage="@SelectedPage"></Pager>
 	</div>
+
 
 
 }

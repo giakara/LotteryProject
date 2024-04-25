@@ -17,10 +17,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="wwwroot\css\Custom.min.css" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Content Include="wwwroot\css\app.scss" />
 	</ItemGroup>
 
@@ -31,6 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Blazored.FluentValidation" Version="2.1.0" />
 		<PackageReference Include="DartSassBuilder" Version="1.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.4" PrivateAssets="all" />

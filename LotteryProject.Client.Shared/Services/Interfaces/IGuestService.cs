@@ -14,5 +14,6 @@ namespace LotteryProject.Client.Shared.Services.Interfaces
 		Task<Guest> GetGuest(Guid guestId, CancellationToken cancellationToken = default);
 		Task<Guest> UpdateGuest(Guest guest, CancellationToken cancellationToken = default);
 		Task<PagedList<Guest>> GetPaged(PagingParameters pagingParameters, CancellationToken cancellationToken = default);
+		Task<PagedList<Guest>> SearchGuests(string searchText, PagingParameters pagingParameters, CancellationToken cancellationToken = default);
 	}
 }

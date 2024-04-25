@@ -214,3 +214,32 @@ h1 {
     border-bottom: 2px solid #333;
     padding-bottom: 10px;
 }
+
+.custom-list {
+    margin-bottom: 10px;
+}
+
+/* Style the search field */
+.input-search {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    margin-bottom: 10px;
+}
+
+/* Style the submit button */
+.btn-search {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+    margin-bottom: 10px;
+}

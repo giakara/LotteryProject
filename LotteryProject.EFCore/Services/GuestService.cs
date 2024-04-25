@@ -96,5 +96,33 @@ namespace LotteryProject.EFCore.Services
 				PageSize = pagedList.PageSize,
 			};
 		}
+		public async Task<PagedList<Guest>> SearchGuests(string searchText, PagingParameters pagingParameters, CancellationToken cancellationToken = default)
+		{
+			var dbSet = _dbContext.Set<Guest>();
+			var countDBItems = await dbSet.Where(p => p.GuestName.Contains(searchText) || p.GuestSurname.Contains(searchText)).CountAsync(cancellationToken);
+
+			var items = await dbSet
+						.Where(p => p.GuestName.Contains(searchText) || p.GuestSurname.Contains(searchText))
+						.OrderBy(on => on.GuestSurname)
+						.Skip((pagingParameters.PageNumber - 1) * pagingParameters.PageSize)
+						.Take(pagingParameters.PageSize)
+						.ToListAsync();
+
+			var pagedList = new PagedList<Guest>()
+			{
+				Items = items,
+				PageNumber = pagingParameters.PageNumber,
+				PageSize = pagingParameters.PageSize,
+				TotalCount = countDBItems,
+			};
+
+			return new PagedList<Guest>()
+			{
+				Items = pagedList.Items,
+				TotalCount = pagedList.TotalCount,
+				PageNumber = pagedList.PageNumber,
+				PageSize = pagedList.PageSize,
+			};
+		}
 	}
 }

@@ -4,8 +4,10 @@ using LotteryProject.Models.Paging;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,8 +20,12 @@ namespace LotteryProject.Components
 		[Inject]
 		protected NavigationManager NavigationManager { get; set; }
 		private IEnumerable<Guest> guests { get; set; } = null!;
+		private string? filteredText;
+
 		private List<int> indexes { get; set; } = new List<int>();
+
 		private PagingParameters _pagingParameters = new PagingParameters() { PageSize = 5 }; //appsettings
+
 
 		protected override async Task OnInitializedAsync()
 		{
@@ -49,5 +55,21 @@ namespace LotteryProject.Components
 			_pagingParameters.PageNumber = page;
 			await GetGuestsFromDb();
 		}
+		private async Task SearchGuest(string? filteredText)
+		{
+			if (string.IsNullOrEmpty(filteredText)) return;
+			await GetSearchedGuests(filteredText);
+		}
+		private async Task GetSearchedGuests(string? filteredText)
+		{
+			var pagedGuests = await _guestService.SearchGuests(filteredText, _pagingParameters);
+			indexes = new List<int>();
+			guests = pagedGuests.Items.ToList();
+			_pagingParameters.TotalPages = pagedGuests.TotalPages;
+			for (int i = 1; i < guests.Count() + 1; i++)
+				indexes.Add(pagedGuests.PageSize * (pagedGuests.PageNumber - 1) + i);
+		}
+
+
 	}
 }

@@ -61,5 +61,12 @@ namespace LotteryProject.Server.Controllers
 			var allGuests = await _guestService.GetAllGuestsPaged(pagingParameters, cancellationToken);
 			return Ok(allGuests);
 		}
+		[HttpGet]
+		[Route("SearchGuest/{searchText}")]
+		public async Task<IActionResult> Get(string searchText, [FromQuery] PagingParameters pagingParameters, CancellationToken cancellationToken = default)
+		{
+			var searchGuests = await _guestService.SearchGuests(searchText, pagingParameters, cancellationToken);
+			return Ok(searchGuests);
+		}
 	}
 }
