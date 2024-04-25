@@ -17,6 +17,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="wwwroot\css\Custom.min.css" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Content Include="wwwroot\css\app.scss" />
 	</ItemGroup>
 

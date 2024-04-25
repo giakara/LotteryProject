@@ -10,5 +10,9 @@
   {
     "outputFile": "Layout/MainLayout.razor.css",
     "inputFile": "Layout/MainLayout.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/Custom.css",
+    "inputFile": "wwwroot/css/Custom.scss"
   }
 ]

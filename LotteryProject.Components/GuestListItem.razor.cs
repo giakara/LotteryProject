@@ -15,7 +15,8 @@ namespace LotteryProject.Components
 
 		[Parameter]
 		public EventCallback<Guest> OnGuestDeleted { get; set; }
-
+		[Parameter]
+		public int Index { get; set; }
 		public bool _isCommentSectionVisible { get; set; }
 
 

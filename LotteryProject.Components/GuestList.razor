@@ -7,23 +7,19 @@
 }
 else
 {
-	<a href="AddGuest" class="btn-green" style="width:fit-content;margin-top:50px; margin-bottom: 10px; background-color:#7E57C2;">
-		<i class="fa fa-plus-square"></i>
-	</a>
-	<table class="test">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Surname</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var guest in guests)
-			{
-				<GuestListItem GuestItem="@guest" OnGuestDeleted="@HandleGuestDeleted" />
-			}
-		</tbody>
-	</table>
+
+	<ul class="guest-list">
+		@for (var index = 1; index < guests.ToList().Count() + 1; index++)
+		{
+			var guest = guests.ToList()[index - 1];
+			var indexOfGuest = indexes[index - 1];
+			<li>
+				<GuestListItem Index="@indexOfGuest" GuestItem="@guest" OnGuestDeleted="@HandleGuestDeleted" />
+			</li>
+		}
+		<button class="add-btn" type="button" onclick="addGuest()">Add Guest</button>
+	</ul>
+
 
 	<div class="pager">
 		<Pager PagingParameters="@_pagingParameters" SelectedPage="@SelectedPage"></Pager>

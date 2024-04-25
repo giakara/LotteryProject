@@ -45,7 +45,7 @@ namespace LotteryProject.Components
 					_links.Add(new PagingLink(i, true, i.ToString()) { IsCurrent = PagingParameters.PageNumber == i });
 				}
 			}
-			_links.Add(new PagingLink(PagingParameters.PageNumber + 1, PagingParameters.TotalPages - PagingParameters.PageNumber - 1 > 0, "Next"));
+			_links.Add(new PagingLink(PagingParameters.PageNumber + 1, PagingParameters.TotalPages - PagingParameters.PageNumber > 0, "Next"));
 		}
 		private async Task OnSelectedPage(PagingLink link)
 		{
