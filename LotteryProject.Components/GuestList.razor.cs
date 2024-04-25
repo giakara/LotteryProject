@@ -57,7 +57,11 @@ namespace LotteryProject.Components
 		}
 		private async Task SearchGuest(string? filteredText)
 		{
-			if (string.IsNullOrEmpty(filteredText)) return;
+			if (string.IsNullOrEmpty(filteredText))
+			{
+				await GetGuestsFromDb();
+				return;
+			}
 			await GetSearchedGuests(filteredText);
 		}
 		private async Task GetSearchedGuests(string? filteredText)
