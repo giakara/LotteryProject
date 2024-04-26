@@ -1,6 +1,6 @@
 ﻿@using LotteryProject.Components
 
-<div class="guest-item">
+<li class="guest-item">
 	<div class="index">
 		@Index <!-- Display index here -->
 	</div>
@@ -13,11 +13,11 @@
 		</div>
 	</div>
 	<div class="buttons">
-		<button class="custom-btn edit-btn">
+		<button class="custom-btn edit-btn" @onclick="@(() => NavigateToEdit(GuestItem.Id))">
 			<i class="fa fa-pencil"></i> Edit
 		</button>
-		<button class="custom-btn delete-btn">
+		<button class="custom-btn delete-btn" @onclick="@(() => DeleteRowItemFromList(GuestItem.Id))">
 			<i class="fa fa-trash"></i> Delete
 		</button>
 	</div>
-</div>
+</li>

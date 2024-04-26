@@ -73,7 +73,8 @@ namespace LotteryProject.EFCore.Services
 		{
 			var dbSet = _dbContext.Set<Guest>();
 			var countDBItems = await dbSet.CountAsync(cancellationToken);
-
+			if (pagingParameters.PageNumber > pagingParameters.TotalPages)
+				pagingParameters.PageNumber = pagingParameters.TotalPages;
 			var items = await dbSet
 						.OrderBy(on => on.GuestSurname)
 						.Skip((pagingParameters.PageNumber - 1) * pagingParameters.PageSize)
@@ -100,7 +101,8 @@ namespace LotteryProject.EFCore.Services
 		{
 			var dbSet = _dbContext.Set<Guest>();
 			var countDBItems = await dbSet.Where(p => p.GuestName.Contains(searchText) || p.GuestSurname.Contains(searchText)).CountAsync(cancellationToken);
-
+			if (pagingParameters.PageNumber > pagingParameters.TotalPages)
+				pagingParameters.PageNumber = pagingParameters.TotalPages;
 			var items = await dbSet
 						.Where(p => p.GuestName.Contains(searchText) || p.GuestSurname.Contains(searchText))
 						.OrderBy(on => on.GuestSurname)

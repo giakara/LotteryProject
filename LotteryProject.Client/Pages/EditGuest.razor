@@ -1,0 +1,12 @@
+﻿@page "/EditGuest/{guestID}"
+
+<h3>Edit Guest</h3>
+
+<PageTitle>Edit Guest</PageTitle>
+
+<GuestItemForm guestID="@guestID"></GuestItemForm>
+
+
+@code {
+	[Parameter] public string guestID { get; set; } = string.Empty;
+}

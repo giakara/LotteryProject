@@ -106,7 +106,7 @@ namespace LotteryProject.Client.Shared.Services
 				//var serializedItem = new StringContent(JsonSerializer.Serialize(requestItem), Encoding.UTF8, "application/json");
 
 				var httpResponse = await _httpClient.PutAsJsonAsync(
-										requestUri: $"{GuestControllerName}/UpdateGuest/",
+										requestUri: $"{GuestControllerName}/UpdateGuest/{guest.Id}",
 										value: guest,
 										cancellationToken: cancellationToken);
 

@@ -73,6 +73,36 @@ h1 {
     font-size: 4em;
 }
 
+h3 {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.5em;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+h3:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 5px;
+    width: 55px;
+    background-color: #111;
+}
+
+h3:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    height: 1px;
+    width: 95%;
+    max-width: 255px;
+    background-color: #333;
+}
+
 .pager {
     flex: 1;
     display: flex;
@@ -242,4 +272,45 @@ h1 {
     border-left: none; /* Prevent double borders */
     cursor: pointer;
     margin-bottom: 10px;
+}
+
+.save-button {
+    background: #1AAB8A;
+    color: #fff;
+    border: none;
+    position: relative;
+    height: 50px;
+    font-size: 1.6em;
+    padding: 0 2em;
+    cursor: pointer;
+    transition: 800ms ease all;
+    outline: none;
+}
+
+.save-button:hover {
+    background: #fff;
+    color: #1AAB8A;
+}
+
+.save-button:before, button:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: #1AAB8A;
+    transition: 400ms ease all;
+}
+
+.save-button:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+}
+
+.save-button:hover:before, save-button:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
 }

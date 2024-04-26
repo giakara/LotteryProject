@@ -7,7 +7,7 @@ namespace LotteryProject.Components
 {
 	public partial class GuestListItem : ComponentBase
 	{
-		[Inject] private IGuestService _todoItemsService { get; set; } = null!;
+		[Inject] private IGuestService _guestService { get; set; } = null!;
 		[Inject] private NavigationManager _navigationManager { get; set; } = null!;
 
 		[Parameter]
@@ -56,19 +56,19 @@ namespace LotteryProject.Components
 		}
 
 
-		//private void NavigateToEdit(Guid todoItemId)
-		//{
-		//	_navigationManager.NavigateTo($"/EditTodo/{todoItemId}");
-		//}
+		private void NavigateToEdit(Guid guestID)
+		{
+			_navigationManager.NavigateTo($"/EditGuest/{guestID}");
+		}
 
-		//protected async void DeleteRowItemFromList(Guid todoItemId)
-		//{
-		//	await _todoItemsService.DeleteById(todoItemId);
+		protected async void DeleteRowItemFromList(Guid guestID)
+		{
+			await _guestService.DeleteGuestById(guestID);
 
-		//	if (TodoItem is not null)
-		//	{
-		//		await OnTodoItemDeleted.InvokeAsync(TodoItem);
-		//	}
-		//}
+			if (GuestItem is not null)
+			{
+				await OnGuestDeleted.InvokeAsync(GuestItem);
+			}
+		}
 	}
 }

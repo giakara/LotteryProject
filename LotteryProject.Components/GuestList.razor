@@ -17,9 +17,9 @@ else
 		{
 			var guest = guests.ToList()[index - 1];
 			var indexOfGuest = indexes[index - 1];
-			<li>
-				<GuestListItem Index="@indexOfGuest" GuestItem="@guest" OnGuestDeleted="@HandleGuestDeleted" />
-			</li>
+
+			<GuestListItem Index="@indexOfGuest" GuestItem="@guest" OnGuestDeleted="@HandleGuestDeleted" />
+
 		}
 		<button class="add-btn" type="button" @onclick="@(() => AddGuest())">Add Guest</button>
 	</ul>
