@@ -129,11 +129,13 @@ h3:after {
 .index {
     margin-right: 10px;
     font-weight: bold;
+    flex: 1 1 33%;
 }
 
 .labels {
     display: flex;
     flex-direction: row;
+    flex: 1 1 33%;
 }
 
 .label-item {
@@ -143,6 +145,8 @@ h3:after {
 
 .buttons {
     display: flex;
+    flex: 1 1 33%;
+    justify-content: flex-end
 }
 
 .edit-btn,
@@ -245,23 +249,56 @@ h1 {
     padding-bottom: 10px;
 }
 
+.guest-full-list {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
 .custom-list {
     margin-bottom: 10px;
 }
 
+.search-box {
+    display: flex;
+    justify-content: center;
+}
 /* Style the search field */
 .input-search {
+    display: flex;
+    flex: 0 1 40%;
+    width: 350px;
+    border: 3px solid #a68b00;
+    background: transparent;
+    padding: 15px 30px;
+    border-radius: 50px;
+    outline: none;
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    letter-spacing: 1px;
     padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
     margin-bottom: 10px;
 }
 
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: black;
+    font-family: Roboto;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    color: black;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+    color: black;
+}
+
 /* Style the submit button */
-.btn-search {
+/*.btn-search {
     float: left;
     width: 20%;
     padding: 10px;
@@ -269,10 +306,10 @@ h1 {
     color: white;
     font-size: 17px;
     border: 1px solid grey;
-    border-left: none; /* Prevent double borders */
-    cursor: pointer;
+    border-left: none;*/ /* Prevent double borders */
+/*cursor: pointer;
     margin-bottom: 10px;
-}
+}*/
 
 .save-button {
     background: #1AAB8A;

@@ -1,9 +1,9 @@
 ﻿@using LotteryProject.Client.Shared.Services.Interfaces;
 @implements IDisposable
-<PageTitle>Guests</PageTitle>
-<h1>Guests</h1>
+<PageTitle>Presents</PageTitle>
+<h1>Presents</h1>
 
-@if (guests is null)
+@if (presents is null)
 {
 	<h3>Loading...</h3>
 }
@@ -14,15 +14,15 @@ else
 			<input class="input-search" type="search" placeholder="Search.." @bind-value="filteredText" name="search" @oninput="OnChangeTask">
 		</div>
 		<ul class="guest-list">
-			@for (var index = 1; index < guests.ToList().Count() + 1; index++)
+			@for (var index = 1; index < presents.ToList().Count() + 1; index++)
 			{
-				var guest = guests.ToList()[index - 1];
-				var indexOfGuest = indexes[index - 1];
+				var present = presents.ToList()[index - 1];
+				var indexOfPresent = indexes[index - 1];
 
-				<GuestListItem Index="@indexOfGuest" GuestItem="@guest" OnGuestDeleted="@HandleGuestDeleted" />
+				<PresentListItem Index="@indexOfPresent" PresentItem="@present" OnPresentDeleted="@HandlePresentDeleted" />
 
 			}
-			<button class="add-btn" type="button" @onclick="@(() => AddGuest())">Add Guest</button>
+			<button class="add-btn" type="button" @onclick="@(() => AddPresent())">Add Present</button>
 		</ul>
 
 		<div class="pager">

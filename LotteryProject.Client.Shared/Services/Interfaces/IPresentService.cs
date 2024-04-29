@@ -1,13 +1,10 @@
-﻿using LotteryProject.Models.DTOs;
+﻿
+using LotteryProject.Models.DTOs;
 using LotteryProject.Models.Entities;
 using LotteryProject.Models.Paging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace LotteryProject.EFCore.Services
+namespace LotteryProject.Client.Shared.Services.Interfaces
 {
 	public interface IPresentService
 	{
@@ -16,7 +13,7 @@ namespace LotteryProject.EFCore.Services
 		Task<IEnumerable<Present>> GetAllPresents(CancellationToken cancellationToken = default);
 		Task<Present> GetPresent(Guid presentId, CancellationToken cancellationToken = default);
 		Task<Present> UpdatePresent(Present present, CancellationToken cancellationToken = default);
-		Task<PagedList<Present>> GetAllPresentsPaged(PagingParameters pagingParameters, CancellationToken cancellationToken = default);
+		Task<PagedList<Present>> GetPaged(PagingParameters pagingParameters, CancellationToken cancellationToken = default);
 		Task<PagedList<Present>> SearchPresents(string searchText, PagingParameters pagingParameters, CancellationToken cancellationToken = default);
 	}
 }

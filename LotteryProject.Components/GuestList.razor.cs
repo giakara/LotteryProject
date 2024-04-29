@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -23,7 +24,7 @@ namespace LotteryProject.Components
 		private string? filteredText;
 
 		private List<int> indexes { get; set; } = new List<int>();
-
+		private CancellationTokenSource src = new();
 		private PagingParameters _pagingParameters = new PagingParameters() { PageSize = 5 }; //appsettings
 
 
@@ -41,7 +42,28 @@ namespace LotteryProject.Components
 			for (int i = 1; i < guests.Count() + 1; i++)
 				indexes.Add(pagedGuests.PageSize * (pagedGuests.PageNumber - 1) + i);
 		}
+		private async Task OnChangeTask(ChangeEventArgs args)
+		{
+			filteredText = args.Value.ToString();
+			src.Cancel();
+			src = new();
+			await Task.Delay(500, src.Token).ContinueWith(SearchGuests, src.Token);
 
+		}
+		private async void SearchGuests(Task obj)
+		{
+			if (filteredText?.Length > 3)
+			{
+				// Call your search function with searchText
+				await GetSearchedGuests(filteredText);
+			}
+			else if (filteredText?.Length == 0)
+			{
+				// If searchText is empty, call function to get all guests
+				await GetGuestsFromDb();
+			}
+			await InvokeAsync(StateHasChanged);
+		}
 		private async Task HandleGuestDeleted(Guest guest)
 		{
 			await GetGuestsFromDb();
@@ -55,15 +77,6 @@ namespace LotteryProject.Components
 			_pagingParameters.PageNumber = page;
 			await GetGuestsFromDb();
 		}
-		private async Task SearchGuest(string? filteredText)
-		{
-			if (string.IsNullOrEmpty(filteredText))
-			{
-				await GetGuestsFromDb();
-				return;
-			}
-			await GetSearchedGuests(filteredText);
-		}
 		private async Task GetSearchedGuests(string? filteredText)
 		{
 			var pagedGuests = await _guestService.SearchGuests(filteredText, _pagingParameters);
@@ -73,7 +86,10 @@ namespace LotteryProject.Components
 			for (int i = 1; i < guests.Count() + 1; i++)
 				indexes.Add(pagedGuests.PageSize * (pagedGuests.PageNumber - 1) + i);
 		}
-
+		public void Dispose()
+		{
+			src.Dispose();
+		}
 
 	}
 }

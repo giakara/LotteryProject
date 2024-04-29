@@ -1,0 +1,23 @@
+﻿@using LotteryProject.Components
+
+<li class="guest-item">
+	<div class="index">
+		@Index <!-- Display index here -->
+	</div>
+	<div class="labels">
+		<div class="label-item">
+			@PresentItem.Description
+		</div>
+		<div class="label-item">
+			@PresentItem.Category
+		</div>
+	</div>
+	<div class="buttons">
+		<button class="custom-btn edit-btn" @onclick="@(() => NavigateToEdit(PresentItem.Id))">
+			<i class="fa fa-pencil"></i> Edit
+		</button>
+		<button class="custom-btn delete-btn" @onclick="@(() => DeleteRowItemFromList(PresentItem.Id))">
+			<i class="fa fa-trash"></i> Delete
+		</button>
+	</div>
+</li>

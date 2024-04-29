@@ -56,7 +56,7 @@ namespace LotteryProject.Components
 
 				ItemViewModel.IsDuplicated = Guests.Any(x => x.GuestName == newGuest.GuestName && x.GuestSurname == newGuest.GuestSurname);
 
-				var valres = Validator.Validate(ItemViewModel, opt => opt.IncludeRuleSets("GuestItemDetails"));
+				var valres = await Validator.ValidateAsync(ItemViewModel, opt => opt.IncludeRuleSets("GuestItemDetails"));
 
 				if (valres.IsValid)
 				{
@@ -70,7 +70,7 @@ namespace LotteryProject.Components
 				else
 				{
 
-					StateHasChanged();
+					await InvokeAsync(StateHasChanged);
 					valres.Errors.Clear();
 				}
 			}
@@ -94,7 +94,7 @@ namespace LotteryProject.Components
 				}
 				else
 				{
-					StateHasChanged();
+					await InvokeAsync(StateHasChanged);
 				}
 
 			}
