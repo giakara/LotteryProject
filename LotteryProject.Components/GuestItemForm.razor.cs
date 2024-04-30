@@ -4,6 +4,7 @@ using LotteryProject.Client.Shared.ViewModels;
 using LotteryProject.Models.DTOs;
 using LotteryProject.Models.Entities;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,10 @@ namespace LotteryProject.Components
 		[Inject] private IGuestService _guestService { get; set; } = null!;
 		[Inject] private NavigationManager _navigationManager { get; set; } = null!;
 		[Inject] protected IValidator<GuestViewModel> Validator { get; set; } = null!;
-
 		//private EditContext _editContext { get; set; } = null!;
 		public GuestViewModel ItemViewModel { get; set; }
-
 		public IEnumerable<Guest> Guests { get; set; }
-
+		public CancellationToken cancellationToken { get; set; } = default;
 		//private ValidationMessageStore _messageStore = null!;
 		[Parameter] public string guestID { get; set; } = string.Empty;
 
@@ -56,7 +55,7 @@ namespace LotteryProject.Components
 
 				ItemViewModel.IsDuplicated = Guests.Any(x => x.GuestName == newGuest.GuestName && x.GuestSurname == newGuest.GuestSurname);
 
-				var valres = await Validator.ValidateAsync(ItemViewModel, opt => opt.IncludeRuleSets("GuestItemDetails"));
+				var valres = await Validator.ValidateAsync(ItemViewModel, opt => opt.IncludeRuleSets("GuestItemDetails"), cancellationToken);
 
 				if (valres.IsValid)
 				{
@@ -70,7 +69,7 @@ namespace LotteryProject.Components
 				else
 				{
 
-					await InvokeAsync(StateHasChanged);
+					StateHasChanged();
 					valres.Errors.Clear();
 				}
 			}

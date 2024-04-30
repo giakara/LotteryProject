@@ -10,7 +10,7 @@ namespace LotteryProject.Client.Shared.ViewModels
 	public class PresentViewModel : IPresentValidationProperties
 	{
 		public string Description { get; set; } = null!;
-		public string Category { get; set; } = null!;
+		public string? Category { get; set; }
 		public Guid Id { get; set; }
 	}
 }

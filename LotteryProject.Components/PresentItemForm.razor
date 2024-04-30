@@ -3,21 +3,18 @@
 
 <EditForm Model="@ItemViewModel" OnValidSubmit="@HandleValidSubmit">
 	<FluentValidationValidator DisableAssemblyScanning="@true" Validator="@Validator"></FluentValidationValidator>
+	@* <ValidationSummary /> *@
 
 	<div class="form-group">
-		<label class="col-md-3">Name</label>
-		<InputText class="col-md-8 form-control" @bind-Value="ItemViewModel.GuestName" style="width: 500px"></InputText>
-		<ValidationMessage For="@(() => ItemViewModel.GuestName)" />
+		<label class="col-md-3">Description</label>
+		<InputText class="col-md-8 form-control" @bind-Value="ItemViewModel.Description" style="width: 500px"></InputText>
+		<ValidationMessage For="@(() => ItemViewModel.Description)" />
 	</div>
 
 	<div class="form-group">
-		<label class="col-md-3">Surname</label>
-		<InputText class="col-md-8 form-control" @bind-Value="ItemViewModel.GuestSurname" style="width: 500px;"></InputText>
-		<ValidationMessage For="@(() => ItemViewModel.GuestSurname)" />
+		<label class="col-md-3">Category</label>
+		<InputText class="col-md-8 form-control" @bind-Value="ItemViewModel.Category" style="width: 500px;"></InputText>
 
-	</div>
-	<div>
-		<ValidationMessage For="@(() => ItemViewModel.IsDuplicated)" />
 	</div>
 	<button type="submit" style="margin-top:10px; background-color: #008000;" class="save-button">
 		<i class="fa fa-save"></i>

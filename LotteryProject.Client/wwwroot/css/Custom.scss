@@ -45,6 +45,33 @@ body {
     font-size: 2em;
 }
 
+.custom-gift-box {
+    display: inline-block;
+    width: 24px; /* Adjust width and height as needed */
+    height: 24px;
+    background-image: url('/images/gift-box.png');
+    background-size: cover; /* Ensure the image covers the entire box */
+    margin-right: 5px;
+}
+
+.custom-home-box {
+    display: inline-block;
+    width: 24px; /* Adjust width and height as needed */
+    height: 24px;
+    background-image: url('/images/home.png');
+    background-size: cover; /* Ensure the image covers the entire box */
+    margin-right: 5px;
+}
+
+.custom-user-box {
+    display: inline-block;
+    width: 24px; /* Adjust width and height as needed */
+    height: 24px;
+    background-image: url('/images/user.png');
+    background-size: cover; /* Ensure the image covers the entire box */
+    margin-right: 5px;
+}
+
 .btn-green {
     @include button-bg(#2ecc71);
 }

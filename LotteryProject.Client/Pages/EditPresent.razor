@@ -1,0 +1,12 @@
+﻿@page "/EditPresent/{presentID}"
+
+<h3>Edit Present</h3>
+
+<PageTitle>Edit Present</PageTitle>
+
+<PresentItemForm presentID="@presentID"></PresentItemForm>
+
+
+@code {
+	[Parameter] public string presentID { get; set; } = string.Empty;
+}
