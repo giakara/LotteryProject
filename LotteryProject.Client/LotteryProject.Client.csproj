@@ -28,7 +28,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="Blazored.FluentValidation" Version="2.1.0" />
+		<PackageReference Include="Blazorise" Version="1.5.2" />
+		<PackageReference Include="Blazorise.Bootstrap" Version="1.5.2" />
+		<PackageReference Include="Blazorise.Components" Version="1.5.2" />
+		<PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.5.2" />
 		<PackageReference Include="DartSassBuilder" Version="1.1.0" />
+		<PackageReference Include="FluentValidation" Version="11.9.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.4" PrivateAssets="all" />
 		<PackageReference Include="System.Reactive" Version="6.0.0" />

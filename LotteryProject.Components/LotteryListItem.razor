@@ -1,0 +1,27 @@
+﻿@if (LotteryItem != null)
+{
+	<li class="guest-item">
+		<div class="index">
+			@Index <!-- Display index here -->
+		</div>
+		<div class="labels">
+			<div class="label-item">
+				@if (LotteryItem.Present != null)
+				{
+					@LotteryItem.Present.Description
+				}
+			</div>
+			<div class="label-item">
+				@if (LotteryItem.Guest != null)
+				{
+					@($"Winner: {LotteryItem.Guest.GuestSurname} {LotteryItem.Guest.GuestName}")
+				}
+			</div>
+		</div>
+		<div class="buttons">
+			<button class="custom-btn delete-btn" @onclick="@(() => DeleteRowItemFromList(LotteryItem.Id))">
+				<i class="fa fa-trash"></i> Delete
+			</button>
+		</div>
+	</li>
+}

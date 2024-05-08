@@ -1,8 +1,8 @@
 ﻿@using Blazored.FluentValidation
 
 
-<EditForm Model="@ItemViewModel" OnValidSubmit="@HandleValidSubmit">
-	<FluentValidationValidator DisableAssemblyScanning="@true" Validator="@Validator"></FluentValidationValidator>
+<EditForm EditContext="_editContext" @ref="_editForm" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+	<FluentValidationValidator Options="(options) => AllRuleSetOptions(options)" DisableAssemblyScanning="@true" Validator="@Validator"></FluentValidationValidator>
 
 	<div class="form-group">
 		<label class="col-md-3">Name</label>
@@ -14,10 +14,6 @@
 		<label class="col-md-3">Surname</label>
 		<InputText class="col-md-8 form-control" @bind-Value="ItemViewModel.GuestSurname" style="width: 500px;"></InputText>
 		<ValidationMessage For="@(() => ItemViewModel.GuestSurname)" />
-
-	</div>
-	<div>
-		<ValidationMessage For="@(() => ItemViewModel.IsDuplicated)" />
 	</div>
 	<button type="submit" style="margin-top:10px; background-color: #008000;" class="save-button">
 		<i class="fa fa-save"></i>

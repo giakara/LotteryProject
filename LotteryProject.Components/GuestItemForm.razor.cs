@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using Blazored.FluentValidation;
+using FluentValidation;
+using FluentValidation.Internal;
 using LotteryProject.Client.Shared.Services.Interfaces;
 using LotteryProject.Client.Shared.ViewModels;
 using LotteryProject.Models.DTOs;
@@ -19,7 +21,11 @@ namespace LotteryProject.Components
 		[Inject] private NavigationManager _navigationManager { get; set; } = null!;
 		[Inject] protected IValidator<GuestViewModel> Validator { get; set; } = null!;
 		//private EditContext _editContext { get; set; } = null!;
-		public GuestViewModel ItemViewModel { get; set; }
+		public GuestViewModel ItemViewModel { get; set; } = new();
+		private EditForm? _editForm;
+		private ValidationMessageStore _validationMessageStore = null!;
+
+		private EditContext? _editContext;
 		public IEnumerable<Guest> Guests { get; set; }
 		public CancellationToken cancellationToken { get; set; } = default;
 		//private ValidationMessageStore _messageStore = null!;
@@ -28,9 +34,7 @@ namespace LotteryProject.Components
 
 		protected override async Task OnInitializedAsync()
 		{
-			ItemViewModel = new();
-
-
+			_editContext = new EditContext(ItemViewModel);
 			if (!string.IsNullOrEmpty(guestID))
 			{
 				var guestIDGuid = new Guid(guestID);
@@ -45,12 +49,31 @@ namespace LotteryProject.Components
 			}
 			Guests = await _guestService.GetAllGuests();
 
+			_validationMessageStore = new ValidationMessageStore(_editContext);
+			base.OnInitialized();
+
+		}
+		protected async Task HandleInvalidSubmit()
+		{
+			HandleValidSubmit();
+		}
+		protected override Task OnAfterRenderAsync(bool firstRender)
+		{
+			if (firstRender)
+			{
+				if (_editForm is null || _editForm.EditContext is null)
+					throw new InvalidOperationException("");
+
+				_validationMessageStore = new ValidationMessageStore(_editForm.EditContext);
+			}
+			return base.OnAfterRenderAsync(firstRender);
 		}
 		protected async Task HandleValidSubmit()
 		{
 			//Add
 			if (string.IsNullOrEmpty(guestID))
 			{
+				_validationMessageStore.Clear();
 				var newGuest = new AddGuestDTO(ItemViewModel.GuestName, ItemViewModel.GuestSurname);
 
 				ItemViewModel.IsDuplicated = Guests.Any(x => x.GuestName == newGuest.GuestName && x.GuestSurname == newGuest.GuestSurname);
@@ -60,7 +83,6 @@ namespace LotteryProject.Components
 				if (valres.IsValid)
 				{
 					var isItemAdded = await _guestService.AddGuest(newGuest);
-
 					if (isItemAdded is not null)
 					{
 						_navigationManager.NavigateTo("/GuestList");
@@ -68,9 +90,15 @@ namespace LotteryProject.Components
 				}
 				else
 				{
+					if (_editForm is null || _editForm.EditContext is null)
+						throw new InvalidOperationException("Edit form is empty");
+					foreach (var error in valres.Errors)
+					{
+						_validationMessageStore.Add(_editForm.EditContext.Field("GuestName"), error.ToString());
+					}
+					await InvokeAsync(StateHasChanged);
+					_editForm.EditContext.NotifyValidationStateChanged();
 
-					StateHasChanged();
-					valres.Errors.Clear();
 				}
 			}
 			else //Update
@@ -98,10 +126,14 @@ namespace LotteryProject.Components
 
 			}
 		}
-
+		private void AllRuleSetOptions(ValidationStrategy<object> options)
+		{
+			options.IncludeAllRuleSets();
+		}
 		private void BackToList()
 		{
 			_navigationManager.NavigateTo("/GuestList");
 		}
+
 	}
 }

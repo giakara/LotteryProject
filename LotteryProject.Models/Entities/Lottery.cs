@@ -2,10 +2,10 @@
 
 namespace LotteryProject.Models.Entities
 {
-	public class Lottery(Guid presentID) : BaseEntity
+	public class Lottery(Guid presentId) : BaseEntity
 	{
-		public Guid GuestID { get; set; }
-		public Guid PresentID { get; set; } = presentID;
+		public Guid GuestId { get; set; }
+		public Guid PresentId { get; set; } = presentId;
 
 		public Guest? Guest { get; set; } = null;
 
