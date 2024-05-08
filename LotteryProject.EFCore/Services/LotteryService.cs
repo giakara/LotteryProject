@@ -68,7 +68,7 @@ namespace LotteryProject.EFCore.Services
 				LotteryDate = DateTime.Now,
 			};
 			lotteryToCreate.Present = _dbContext.Presents.FirstOrDefault(l => l.Id == lotteryToCreate.PresentId);
-			lotteryToCreate.Guest = _dbContext.Guests.FirstOrDefault(l => l.Id != lotteryToCreate.GuestId);
+			lotteryToCreate.Guest = _dbContext.Guests.FirstOrDefault(l => l.Id == lotteryToCreate.GuestId);
 			_dbContext.Lotteries.Add(lotteryToCreate);
 			await _dbContext.SaveChangesAsync(cancellationToken);
 			return lotteryToCreate;
