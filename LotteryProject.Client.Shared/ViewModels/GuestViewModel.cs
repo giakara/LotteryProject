@@ -11,6 +11,7 @@ namespace LotteryProject.Client.Shared.ViewModels
 	{
 		public string GuestName { get; set; } = null!;
 		public string GuestSurname { get; set; } = null!;
+		public string Email { get; set; } = null!;
 		public Guid Id { get; set; }
 		public bool IsDuplicated { get; set; }
 	}

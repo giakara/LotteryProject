@@ -11,7 +11,7 @@ namespace LotteryProject.Models.Validations
 		public Guid Id { get; set; }
 		public string GuestName { get; set; }
 		public string GuestSurname { get; set; }
-
+		public string Email { get; set; }
 		public bool IsDuplicated { get; set; }
 	}
 }

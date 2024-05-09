@@ -13,8 +13,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LotteryProject.EFCore.Migrations
 {
     [DbContext(typeof(EntityDbContext.DataContext))]
-    [Migration("20240508101548_Intitial")]
-    partial class Intitial
+    [Migration("20240509080416_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,11 @@ namespace LotteryProject.EFCore.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("GuestName")
                         .IsRequired()
@@ -65,6 +70,10 @@ namespace LotteryProject.EFCore.Migrations
                     b.ComplexProperty<Dictionary<string, object>>("Guest", "LotteryProject.Models.Entities.Lottery.Guest#Guest", b1 =>
                         {
                             b1.IsRequired();
+
+                            b1.Property<string>("Email")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("GuestName")
                                 .IsRequired()

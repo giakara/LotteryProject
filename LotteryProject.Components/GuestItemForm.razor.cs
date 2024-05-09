@@ -74,7 +74,7 @@ namespace LotteryProject.Components
 			if (string.IsNullOrEmpty(guestID))
 			{
 				_validationMessageStore.Clear();
-				var newGuest = new AddGuestDTO(ItemViewModel.GuestName, ItemViewModel.GuestSurname);
+				var newGuest = new AddGuestDTO(ItemViewModel.GuestName, ItemViewModel.GuestSurname, ItemViewModel.Email);
 
 				ItemViewModel.IsDuplicated = Guests.Any(x => x.GuestName == newGuest.GuestName && x.GuestSurname == newGuest.GuestSurname);
 
@@ -103,7 +103,7 @@ namespace LotteryProject.Components
 			}
 			else //Update
 			{
-				var updateGuest = new Guest(ItemViewModel.GuestName, ItemViewModel.GuestSurname)
+				var updateGuest = new Guest(ItemViewModel.GuestName, ItemViewModel.GuestSurname, ItemViewModel.Email)
 				{
 					Id = new Guid(guestID)
 				};

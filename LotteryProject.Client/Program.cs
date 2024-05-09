@@ -23,6 +23,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<IGuestService, GuestService>();
 builder.Services.AddScoped<IPresentService, PresentService>();
 builder.Services.AddScoped<ILotteryService, LotteryService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7292/") });
 builder.Services.AddEntityClientValidations();
 await builder.Build().RunAsync();

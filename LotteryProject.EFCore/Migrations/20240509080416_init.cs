@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LotteryProject.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class Intitial : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,8 @@ namespace LotteryProject.EFCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     GuestName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    GuestSurname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    GuestSurname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,6 +33,7 @@ namespace LotteryProject.EFCore.Migrations
                     GuestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PresentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LotteryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Guest_Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Guest_GuestName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Guest_GuestSurname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Guest_Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),

@@ -29,6 +29,11 @@ namespace LotteryProject.EFCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("GuestName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -62,6 +67,10 @@ namespace LotteryProject.EFCore.Migrations
                     b.ComplexProperty<Dictionary<string, object>>("Guest", "LotteryProject.Models.Entities.Lottery.Guest#Guest", b1 =>
                         {
                             b1.IsRequired();
+
+                            b1.Property<string>("Email")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("GuestName")
                                 .IsRequired()

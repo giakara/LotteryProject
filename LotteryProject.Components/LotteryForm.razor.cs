@@ -14,6 +14,7 @@ namespace LotteryProject.Components
 	{
 		[Inject] private IPresentService _presentService { get; set; } = null!;
 		[Inject] private ILotteryService _lotteryService { get; set; } = null!;
+		[Inject] private IEmailService _emailService { get; set; } = null!;
 		[Inject] private IGuestService _guestService { get; set; } = null!;
 		[Inject] private NavigationManager _navigationManager { get; set; } = null!;
 		//[Inject] protected IValidator<PresentViewModel> Validator { get; set; } = null!;
@@ -48,6 +49,8 @@ namespace LotteryProject.Components
 					{
 						var guest = await _guestService.GetGuest(lottery.GuestId);
 						lotteryWinner = guest.GuestSurname + " " + guest.GuestName;
+						await _emailService.SendEmail(new EmailData
+						{ EmailAddress = guest.Email, Subject = "Gongatulations", Message = "You win a " + lottery.Present.Description });
 						OpenModal();
 					}
 				}

@@ -22,11 +22,11 @@ namespace LotteryProject.UnitTests.Fixtures
 						context.Database.EnsureDeleted();
 						context.Database.EnsureCreated();
 						context.AddRange(
-							new Guest("test1", "test1")
+							new Guest("test1", "test1", "eseaa")
 							{
 								Id = new Guid("3a39a232-b5f1-4f04-b07b-43c843185889")
 							},
-							new Guest("test2", "test2")
+							new Guest("test2", "test2", "eseaa")
 							{
 								Id = new Guid("dd3f3be4-1094-459e-b3a6-a978aaf550a3")
 							},

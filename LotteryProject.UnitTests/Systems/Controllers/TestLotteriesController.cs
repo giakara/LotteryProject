@@ -81,7 +81,7 @@ namespace LotteryProject.UnitTests.Systems.Controllers
 			var cancellationToken = new CancellationToken();
 			using var context = _fixture.CreateContext();
 			var guestGuid = new Guid("c1ec69af-1e22-4a3f-a959-5772a8a1dc2e");
-			var newGuest = new Guest("test3", "test3")
+			var newGuest = new Guest("test3", "test3", "ggg@net.gr")
 			{
 				Id = guestGuid,
 			};
