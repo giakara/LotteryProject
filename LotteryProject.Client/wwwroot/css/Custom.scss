@@ -45,6 +45,26 @@ body {
     font-size: 2em;
 }
 
+.custom-navbar-brand {
+    background-image: url('/images/Epsilonnet.jpg');
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat;
+    width: 200px; /* Adjust width and height as needed */
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.custom-navbar-brand a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Poiret One', cursive;
+    font-size: 1.3em;
+    font: bold;
+    margin-left: 80px; /* Adjust as needed */
+}
+
 .custom-lottery-box {
     display: inline-block;
     width: 24px; /* Adjust width and height as needed */
