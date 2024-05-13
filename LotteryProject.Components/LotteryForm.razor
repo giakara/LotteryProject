@@ -1,24 +1,19 @@
 ﻿@using LotteryProject.Client.Shared.Services.Interfaces;
 @using LotteryProject.Models.Entities
+@using Radzen
+@using Radzen.Blazor
 <h3>Lottery</h3>
 <div>
 	<button style="margin-top:10px;margin-left:10px;margin-bottom:15px;background-color: #7E57C2;" class="save-button" @onclick="BackToList">
 		<i class="fa fa-reply"></i>
 	</button>
 </div>
-<div>
-	<Autocomplete TItem="Present"
-				  TValue="string"
-				  Data="@Presents"
-				  TextField="@(( item ) => item.Description)"
-				  ValueField="@(( item ) => item.Id.ToString())"
-				  @bind-SelectedValue="@selectedSearchValue"
-				  @bind-SelectedText="selectedAutoCompleteText"
-				  Placeholder="Search..."
-				  Filter="AutocompleteFilter.StartsWith"
-				  CustomFilter="@(( item, searchValue ) => item.Description.IndexOf( searchValue, 0, StringComparison.CurrentCultureIgnoreCase ) >= 0 )">
-		<NotFoundContent> Sorry... @context was not found! :( </NotFoundContent>
-	</Autocomplete>
+<div display: flex class="rz-p-sm-12 rz-text-align-center">
+	<h2>
+		Presents:
+	</h2>
+	<RadzenDropDown @ref=@radzenDropDown FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" FilterOperator="StringFilterOperator.StartsWith" AllowFiltering="true"
+					Data=@Presents TextProperty="Description" ValueProperty="Id" AllowClear="true" @bind-Value="@selectedSearchValue" Style="width: 100%; max-width: 400px;" Name="DropDownFiltering" />
 </div>
 <div style="display: flex; justify-content: center; margin-top: 120px">
 	<div class="wrap">
@@ -36,6 +31,7 @@
 </WinnerPopUp>
 
 @code {
+	RadzenDropDown<Guid> radzenDropDown;
 	bool isOpened = false;
 
 	void OpenModal()

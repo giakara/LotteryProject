@@ -14,8 +14,8 @@ namespace LotteryProject.EFCore.Services
 
 		public Task SendEmailAsync(EmailData emaildata, CancellationToken cancellationToken = default)
 		{
-			var mailFrom = "julie.kovacek@ethereal.email";
-			var password = "DrHNs7fzTzEttT6CeC";
+			var mailFrom = "jadyn.becker@ethereal.email";
+			var password = "BbaGdRUPnFTNdVCWES";
 
 			var client = new SmtpClient("smtp.ethereal.email", 587)
 			{

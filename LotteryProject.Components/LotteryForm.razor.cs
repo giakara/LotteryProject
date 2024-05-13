@@ -1,11 +1,9 @@
 ﻿
-using Blazorise;
-using LotteryProject.Client.Shared.Services;
 using LotteryProject.Client.Shared.Services.Interfaces;
 using LotteryProject.Models.DTOs;
 using LotteryProject.Models.Entities;
 using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using Radzen;
 
 
 namespace LotteryProject.Components
@@ -26,7 +24,7 @@ namespace LotteryProject.Components
 		//private ValidationMessageStore _messageStore = null!;
 		[Parameter] public string lotteryID { get; set; } = string.Empty;
 		public string lotteryWinner { get; set; } = string.Empty;
-		public string selectedSearchValue { get; set; }
+		public Guid selectedSearchValue { get; set; }
 		public string selectedAutoCompleteText { get; set; }
 		protected override async Task OnInitializedAsync()
 		{
@@ -38,7 +36,7 @@ namespace LotteryProject.Components
 		{
 			if (isOpened) return;
 			var presents = await _presentService.GetAllPresents();
-			Guid? presentID = presents.ToList().FirstOrDefault(x => x.Id.ToString() == selectedSearchValue)?.Id;
+			Guid? presentID = presents.ToList().FirstOrDefault(x => x.Id == selectedSearchValue)?.Id;
 			if (presentID != null)
 			{
 				var lotteryDTO = new AddEditLotteryDTO(presentID.Value);
