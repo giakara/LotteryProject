@@ -55,7 +55,6 @@ namespace LotteryProject.UnitTests.Systems.Controllers
 			{
 				PresentID = guid,
 			};
-
 			var lotteryService = new LotteryService(context);
 			await Assert.ThrowsAsync<LotteryPresentIsRequiredException>(() => lotteryService.CreateLottery(lotterytoAdd, cancellationToken));
 
@@ -85,12 +84,13 @@ namespace LotteryProject.UnitTests.Systems.Controllers
 			{
 				Id = guestGuid,
 			};
+			var guid = new Guid("fba7c0dc-4aba-45dd-aab2-dec90db19be8");
 			try
 			{
 				await context.AddRangeAsync(newGuest);
 				await context.SaveChangesAsync();
 
-				var guid = new Guid("fba7c0dc-4aba-45dd-aab2-dec90db19be8");
+
 				var lotterytoAdd = new AddEditLotteryDTO
 				{
 					PresentID = guid,
@@ -103,6 +103,7 @@ namespace LotteryProject.UnitTests.Systems.Controllers
 			finally
 			{
 				context.Set<Guest>().Remove(newGuest);
+				context.Set<Lottery>().Remove(context.Lotteries.First(x => x.PresentId == guid));
 				await context.SaveChangesAsync();
 
 			}
