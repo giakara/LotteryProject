@@ -17,44 +17,6 @@ namespace LotteryProject.Components
 		public EventCallback<Present> OnPresentDeleted { get; set; }
 		[Parameter]
 		public int Index { get; set; }
-		public bool _isCommentSectionVisible { get; set; }
-
-
-		protected override void OnAfterRender(bool firstRender)
-		{
-			base.OnAfterRender(firstRender);
-		}
-		protected override Task OnAfterRenderAsync(bool firstRender)
-		{
-			return base.OnAfterRenderAsync(firstRender);
-		}
-
-		protected override void OnParametersSet()
-		{
-			base.OnParametersSet();
-		}
-		protected override Task OnParametersSetAsync()
-		{
-			return base.OnParametersSetAsync();
-		}
-
-		protected override void OnInitialized()
-		{
-			base.OnInitialized();
-		}
-
-		protected override Task OnInitializedAsync()
-		{
-			return base.OnInitializedAsync();
-		}
-
-
-
-		private bool CommentSectionIsVisible()
-		{
-			return _isCommentSectionVisible;
-		}
-
 
 		private void NavigateToEdit(Guid presentID)
 		{

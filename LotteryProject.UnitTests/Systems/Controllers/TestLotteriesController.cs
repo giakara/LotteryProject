@@ -63,7 +63,7 @@ namespace LotteryProject.UnitTests.Systems.Controllers
 		public async Task Test_CreateLottery_Failed_ThrowLotteryNoAvailableGuestsException()
 		{
 			using var context = _fixture.CreateContext();
-			var guid = new Guid("fba7c0dc-4aba-45dd-aab2-dec90db19be8");
+			var guid = new Guid("50530ff8-9798-4dda-8a22-41ab36b5a0fa");
 			var cancellationToken = new CancellationToken();
 			var lotterytoAdd = new AddEditLotteryDTO
 			{
@@ -84,7 +84,7 @@ namespace LotteryProject.UnitTests.Systems.Controllers
 			{
 				Id = guestGuid,
 			};
-			var guid = new Guid("fba7c0dc-4aba-45dd-aab2-dec90db19be8");
+			var guid = new Guid("50530ff8-9798-4dda-8a22-41ab36b5a0fa");
 			try
 			{
 				await context.AddRangeAsync(newGuest);
@@ -102,35 +102,13 @@ namespace LotteryProject.UnitTests.Systems.Controllers
 			}
 			finally
 			{
-				context.Set<Guest>().Remove(newGuest);
+
 				context.Set<Lottery>().Remove(context.Lotteries.First(x => x.PresentId == guid));
+				await context.SaveChangesAsync();
+				context.Set<Guest>().Remove(newGuest);
 				await context.SaveChangesAsync();
 
 			}
-			//var posts = new List<Guest>();
-			//var contextMock = new Mock<DataContext>();
-			//var guestGuid = new Guid("c1ec69af-1e22-4a3f-a959-5772a8a1dc2e");
-			//var newGuest = new Guest("test3", "test3")
-			//{
-			//    Id = guestGuid,
-			//};
-			//var guid = new Guid("fba7c0dc-4aba-45dd-aab2-dec90db19be8");
-			//var lotterytoAdd = new AddEditLotteryDTO
-			//{
-			//    PresentID = guid,
-			//};
-			//var present = new Present("tessss") { Id = guid };
-
-			//posts.Add(newGuest);
-			//contextMock.Setup(p => p.Guests).ReturnsDbSet(posts);
-			//contextMock.Setup(p => p.Lotteries).ReturnsDbSet(new List<Lottery>());
-			//contextMock.Setup(p => p.Presents).ReturnsDbSet(new List<Present>() { present });
-			//var lotteryService = new LotteryService(contextMock.Object);
-			//var successReturn = lotteryService.CreateLottery(lotterytoAdd, cancellationToken)?.Result;
-			//successReturn!.PresentID.Should().Be(guid);
-
-
-
 
 		}
 	}

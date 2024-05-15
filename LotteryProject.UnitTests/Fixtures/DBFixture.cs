@@ -45,9 +45,9 @@ namespace LotteryProject.UnitTests.Fixtures
 						);
 						context.SaveChanges();
 						context.AddRange(
-							new Lottery(new Guid("1ba7e5d5-69e1-4888-8e83-3e060d11e83c"), new Guid("3a39a232-b5f1-4f04-b07b-43c843185889"), DateTime.Now),
-						new Lottery(new Guid("1ba7e5d5-69e1-4888-8e83-3e060d11e83c"), new Guid("dd3f3be4-1094-459e-b3a6-a978aaf550a3"), DateTime.Now)
-							);
+											new Lottery(new Guid("1ba7e5d5-69e1-4888-8e83-3e060d11e83c"), new Guid("3a39a232-b5f1-4f04-b07b-43c843185889"), DateTime.Now),
+											new Lottery(new Guid("fba7c0dc-4aba-45dd-aab2-dec90db19be8"), new Guid("dd3f3be4-1094-459e-b3a6-a978aaf550a3"), DateTime.Now)
+										);
 						context.SaveChanges();
 					}
 
