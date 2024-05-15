@@ -19,7 +19,7 @@ namespace LotteryProject.Components
 
 		[Inject] private IGuestService _guestService { get; set; } = null!;
 		[Inject]
-		protected NavigationManager NavigationManager { get; set; }
+		protected NavigationManager? NavigationManager { get; set; }
 		private IEnumerable<Guest> guests { get; set; } = null!;
 		private string? filteredText;
 
@@ -44,7 +44,7 @@ namespace LotteryProject.Components
 		}
 		private async Task OnChangeTask(ChangeEventArgs args)
 		{
-			filteredText = args.Value.ToString();
+			filteredText = args.Value?.ToString();
 			src.Cancel();
 			src = new();
 			await Task.Delay(500, src.Token).ContinueWith(SearchGuests, src.Token);
@@ -70,7 +70,7 @@ namespace LotteryProject.Components
 		}
 		protected void AddGuest()
 		{
-			NavigationManager.NavigateTo("/AddGuest");
+			NavigationManager?.NavigateTo("/AddGuest");
 		}
 		private async Task SelectedPage(int page)
 		{
@@ -79,6 +79,7 @@ namespace LotteryProject.Components
 		}
 		private async Task GetSearchedGuests(string? filteredText)
 		{
+			if (filteredText == null) return;
 			var pagedGuests = await _guestService.SearchGuests(filteredText, _pagingParameters);
 			indexes = new List<int>();
 			guests = pagedGuests.Items.ToList();

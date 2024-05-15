@@ -11,11 +11,12 @@ namespace LotteryProject.EFCore.Configurations
 		{
 			builder.ToTable("Lotteries");
 			builder.HasKey(b => b.Id);
-
-			builder.HasOne(b => b.Guest);
+			builder.Property(b => b.GuestId).IsRequired();
+			builder.HasOne(b => b.Guest).WithMany(x => x.Lotteries).HasForeignKey(x => x.GuestId).IsRequired().OnDelete(DeleteBehavior.Restrict);
 
 			builder.Property(b => b.PresentId).IsRequired();
-
+			builder.HasOne(b => b.Present).WithOne().HasForeignKey<Lottery>(x => x.PresentId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+			builder.Property(b => b.LotteryDate).IsRequired();
 		}
 	}
 }

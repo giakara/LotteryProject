@@ -1,5 +1,6 @@
 using LotteryProject.EFCore.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using static LotteryProject.EFCore.EntityDbContext;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,11 +13,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("LotteryProject.EFCore")));
-
 builder.Services.AddScoped<IGuestService, GuestService>();
 builder.Services.AddScoped<IPresentService, PresentService>();
 builder.Services.AddScoped<ILotteryService, LotteryService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+	options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+	options.JsonSerializerOptions.WriteIndented = true;
+});
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy(name: "BlazorApp",

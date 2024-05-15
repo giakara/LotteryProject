@@ -14,18 +14,17 @@ namespace LotteryProject.EFCore.Services
 
 		public Task SendEmailAsync(EmailData emaildata, CancellationToken cancellationToken = default)
 		{
-			var mailFrom = "jadyn.becker@ethereal.email";
-			var password = "BbaGdRUPnFTNdVCWES";
+			string mailFrom = "jadyn.becker@ethereal.email";
+			string password = "BbaGdRUPnFTNdVCWES";
 
 			var client = new SmtpClient("smtp.ethereal.email", 587)
 			{
 				EnableSsl = true,
 				Credentials = new NetworkCredential(mailFrom, password)
 			};
-			return client.SendMailAsync(
-				new MailMessage(from: mailFrom,
+			return client.SendMailAsync(new MailMessage(from: mailFrom,
 									to: emaildata.EmailAddress,
-									emaildata.Subject, emaildata.Message));
+									emaildata.Subject, emaildata.Message), cancellationToken);
 		}
 	}
 }

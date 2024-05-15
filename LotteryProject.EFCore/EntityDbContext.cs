@@ -15,8 +15,7 @@ namespace LotteryProject.EFCore
 				base.OnModelCreating(modelBuilder);
 				new GuestConfiguration().Configure(modelBuilder.Entity<Guest>());
 				new PresentConfiguration().Configure(modelBuilder.Entity<Present>());
-				modelBuilder.Entity<Lottery>().ComplexProperty(b => b.Present).IsRequired();
-				modelBuilder.Entity<Lottery>().ComplexProperty(b => b.Guest).IsRequired();
+				new LotteryConfiguration().Configure(modelBuilder.Entity<Lottery>());
 			}
 			public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 

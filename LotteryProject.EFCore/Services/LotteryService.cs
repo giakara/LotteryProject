@@ -28,7 +28,7 @@ namespace LotteryProject.EFCore.Services
 		}
 		public async Task<IEnumerable<Lottery>> GetAllLotteries(CancellationToken cancellationToken = default)
 		{
-			return await _dbContext.Lotteries.ToListAsync(cancellationToken);
+			return await _dbContext.Lotteries.Include(l => l.Guest).Include(l => l.Present).ToListAsync(cancellationToken);
 		}
 		public async Task<bool> DeleteLotteryById(Guid lotteryId, CancellationToken cancellationToken = default)
 		{
@@ -48,25 +48,15 @@ namespace LotteryProject.EFCore.Services
 				throw new LotteryPresentIsRequiredException("Present is required for the Lottery");
 			if (_dbContext.Lotteries.Any(l => l.PresentId == lottery.PresentID))
 				throw new LotteryPresentIsGiftedException("Present is Gifted Already");
-			var guestIdsWithLotteryToday = await _dbContext.Lotteries
-											.Where(l => l.LotteryDate.HasValue && l.LotteryDate.Value.Date == DateTime.Today)
-											.Select(l => l.GuestId)
-											.ToListAsync(cancellationToken);
-
-			// Now, get all GuestIDs that don't have a record for the current day
 			var availableGuestIds = await _dbContext.Guests
-														.Where(g => !guestIdsWithLotteryToday.Contains(g.Id))
-														.Select(g => g.Id)
-														.ToListAsync(cancellationToken);
+									.Where(g => !g.Lotteries.Any(l => l.LotteryDate.Date == DateTime.Today))
+									.Select(g => g.Id)
+									.ToListAsync(cancellationToken);
 			if (availableGuestIds.Count == 0)
 			{
 				throw new LotteryNoAvailableGuestsException("No available guests for the lottery today");
 			}
-			var lotteryToCreate = new Lottery(lottery.PresentID)
-			{
-				GuestId = availableGuestIds[new Random().Next(0, availableGuestIds.Count)],
-				LotteryDate = DateTime.Now,
-			};
+			var lotteryToCreate = new Lottery(lottery.PresentID, availableGuestIds[new Random().Next(0, availableGuestIds.Count)], DateTime.Now);
 			lotteryToCreate.Present = _dbContext.Presents.FirstOrDefault(l => l.Id == lotteryToCreate.PresentId);
 			lotteryToCreate.Guest = _dbContext.Guests.FirstOrDefault(l => l.Id == lotteryToCreate.GuestId);
 			_dbContext.Lotteries.Add(lotteryToCreate);
@@ -75,7 +65,8 @@ namespace LotteryProject.EFCore.Services
 		}
 		public async Task<PagedList<Lottery>> GetAllLotteriesPaged(PagingParameters pagingParameters, CancellationToken cancellationToken = default)
 		{
-			var dbSet = _dbContext.Set<Lottery>();
+
+			var dbSet = _dbContext.Set<Lottery>().Include(l => l.Guest).Include(l => l.Present);
 			var countDBItems = await dbSet.CountAsync(cancellationToken);
 			var lastPage = (int)Math.Ceiling((double)countDBItems / pagingParameters.PageSize);
 			if (pagingParameters.PageNumber > lastPage && lastPage > 0)

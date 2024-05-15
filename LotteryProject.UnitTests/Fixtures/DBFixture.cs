@@ -45,20 +45,8 @@ namespace LotteryProject.UnitTests.Fixtures
 						);
 						context.SaveChanges();
 						context.AddRange(
-							new Lottery(new Guid("1ba7e5d5-69e1-4888-8e83-3e060d11e83c"))
-							{
-								GuestId = new Guid("3a39a232-b5f1-4f04-b07b-43c843185889"),
-								LotteryDate = DateTime.Now,
-								Present = context.Find<Present>(new Guid("1ba7e5d5-69e1-4888-8e83-3e060d11e83c")),
-								Guest = context.Find<Guest>(new Guid("3a39a232-b5f1-4f04-b07b-43c843185889"))
-							},
-						new Lottery(new Guid("1ba7e5d5-69e1-4888-8e83-3e060d11e83c"))
-						{
-							GuestId = new Guid("dd3f3be4-1094-459e-b3a6-a978aaf550a3"),
-							LotteryDate = DateTime.Now,
-							Present = context.Find<Present>(new Guid("1ba7e5d5-69e1-4888-8e83-3e060d11e83c")),
-							Guest = context.Find<Guest>(new Guid("dd3f3be4-1094-459e-b3a6-a978aaf550a3"))
-						}
+							new Lottery(new Guid("1ba7e5d5-69e1-4888-8e83-3e060d11e83c"), new Guid("3a39a232-b5f1-4f04-b07b-43c843185889"), DateTime.Now),
+						new Lottery(new Guid("1ba7e5d5-69e1-4888-8e83-3e060d11e83c"), new Guid("dd3f3be4-1094-459e-b3a6-a978aaf550a3"), DateTime.Now)
 							);
 						context.SaveChanges();
 					}

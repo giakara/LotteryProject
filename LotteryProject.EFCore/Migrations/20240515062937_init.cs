@@ -26,27 +26,6 @@ namespace LotteryProject.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lotteries",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GuestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PresentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LotteryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Guest_Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Guest_GuestName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Guest_GuestSurname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Guest_Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Present_Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Present_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Present_Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Lotteries", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Presents",
                 columns: table => new
                 {
@@ -58,16 +37,53 @@ namespace LotteryProject.EFCore.Migrations
                 {
                     table.PrimaryKey("PK_Presents", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Lotteries",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GuestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PresentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LotteryDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lotteries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Lotteries_Guests_GuestId",
+                        column: x => x.GuestId,
+                        principalTable: "Guests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Lotteries_Presents_PresentId",
+                        column: x => x.PresentId,
+                        principalTable: "Presents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lotteries_GuestId",
+                table: "Lotteries",
+                column: "GuestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lotteries_PresentId",
+                table: "Lotteries",
+                column: "PresentId",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Guests");
+                name: "Lotteries");
 
             migrationBuilder.DropTable(
-                name: "Lotteries");
+                name: "Guests");
 
             migrationBuilder.DropTable(
                 name: "Presents");
